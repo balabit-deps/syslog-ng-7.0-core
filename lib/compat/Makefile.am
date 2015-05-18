@@ -20,6 +20,7 @@ compat_sources			= 	\
 	lib/compat/strcasestr.c		\
 	lib/compat/strtok_r.c		\
 	lib/compat/time.c		\
-	lib/compat/openssl_support.c
+	lib/compat/openssl_support.c	\
+	lib/compat/glib.c
 
 include lib/compat/tests/Makefile.am
