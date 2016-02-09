@@ -1,0 +1,4 @@
+./install-sh: NEWS does not exist.
+make: *** [tgz2build/stamps/stamp-install] Error 1
+
+Now, it does.
