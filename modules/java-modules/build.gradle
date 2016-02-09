@@ -10,6 +10,13 @@ subprojects {
             dirs syslogBuildDir + '/common/gradle/libs'
             dirs '/usr/lib/syslog-ng-java-module-dependency-jars/jars'
         }
+        maven {
+           url "http://archiva.syslog-ng.balabit:8080/repository/internal/"
+           credentials {
+               username "testbot"
+               password "titkos12"
+           }
+        }
     }
 
     compileJava {
