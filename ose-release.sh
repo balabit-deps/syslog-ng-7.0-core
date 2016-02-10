@@ -1,15 +1,16 @@
 #!/bin/bash
 
-VERSION=$(git describe HEAD)
+HASH=$(openssl rand -hex 3)
+COMMIT=$(git describe HEAD)
+# removes the syslog-ng- prefix from the string, dpkg-source needs version strings starting with numbers
+VERSION="${COMMIT#syslog-ng-}-$HASH"
 echo "$VERSION" > VERSION
 RELEASE="syslog-ng-$VERSION"
 DISTTAR="$RELEASE.tar.gz"
 DEBRELEASE="syslog-ng_$VERSION"
 DSC="$DEBRELEASE.dsc"
 
-ZBC_HASH=$(openssl rand -hex 3)
-ZBC_DATE=$(date +"%Y%m%d+%H%M")
-ZBC_FILENAME="syslog-ng-ose-btibi-$ZBC_DATE-$ZBC_HASH.zbc"
+ZBC_FILENAME="syslog-ng-$VERSION.zbc"
 
 ZBS_INCOMING_DIR="build.syslog-ng:/var/etalon/zbs2/incoming"
 
