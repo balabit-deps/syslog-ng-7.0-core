@@ -1,6 +1,7 @@
 #!/bin/bash
 
-VERSION=$(cat VERSION)
+VERSION=$(git describe HEAD)
+echo "$VERSION" > VERSION
 RELEASE="syslog-ng-$VERSION"
 DISTTAR="$RELEASE.tar.gz"
 DEBRELEASE="syslog-ng_$VERSION"
