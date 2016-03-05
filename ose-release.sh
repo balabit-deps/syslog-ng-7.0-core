@@ -14,6 +14,7 @@ ZBC_FILENAME="syslog-ng-$VERSION.zbc"
 
 ZBS_INCOMING_DIR="build.syslog-ng:/var/etalon/zbs2/incoming"
 
+./autogen.sh
 rm -rf b/
 mkdir b
 cd b
@@ -29,7 +30,7 @@ Owner: btibi
 Format: 1.0
 Source-Format: debian
 Snapshot: yes
-Targets: linux-glibc2.11/syslog-ng-pe-5.6-ose38alpha0/amd64
+Targets: linux-glibc2.11/syslog-ng-pe-5.6-ose-jviktor/amd64
 Item: $DSC
 ZBC
 
