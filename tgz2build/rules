@@ -8,7 +8,7 @@ CONFIGURE_OPTS := --prefix $(ZBS_PREFIX) --enable-dynamic-linking --enable-sql \
 	--with-pidfile-dir=$(ZBS_PREFIX)/var/run \
 	--with-module-dir=$(ZBS_PREFIX)/lib \
 	--without-librabbitmq-client --disable-amqp \
-  --with-ivykis=system
+	--with-ivykis=system --disable-env-wrapper
 
 INSTALL:=./install-sh
 RPATH=-Wl,-R/opt/syslog-ng/lib
