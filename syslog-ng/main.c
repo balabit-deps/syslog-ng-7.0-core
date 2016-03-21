@@ -148,6 +148,7 @@ version(void)
          "Enable-Spoof-Source: %s\n"
          "Enable-TCP-Wrapper: %s\n"
          "Enable-Linux-Caps: %s\n",
+         "Enable-Pcre: on\n",
          ON_OFF_STR(SYSLOG_NG_ENABLE_DEBUG),
          ON_OFF_STR(SYSLOG_NG_ENABLE_GPROF),
          ON_OFF_STR(SYSLOG_NG_ENABLE_MEMTRACE),
