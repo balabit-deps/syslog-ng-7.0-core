@@ -84,10 +84,12 @@ $(STAMPDIR)/stamp-install: $(STAMPDIR)/stamp-build
 	$(INSTALL) -d -m 755 $(ZBS_STAGE_DIR)/$(ZBS_PREFIX)/share/man/man5
 	$(INSTALL) -d -m 755 $(ZBS_STAGE_DIR)/$(ZBS_PREFIX)/share/man/man8
 
+	$(INSTALL) -m 644 $(ZBS_SOURCE_DIR)/contrib/balabit-initscripts/init-functions $(ZBS_STAGE_DIR)/$(ZBS_PREFIX)/lib
+
 	cd $(ZBS_SOURCE_DIR)
 	rm -rf $(ZBS_STAGE_DIR)/$(ZBS_PREFIX)/share/doc/contrib/Makefile*
- 
-	touch $@ 
+
+	touch $@
 
 clean:
 	rm -rf tgz2build/stamps || true
