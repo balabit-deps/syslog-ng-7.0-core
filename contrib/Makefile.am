@@ -73,6 +73,9 @@ EXTRA_DIST += \
 	contrib/systemd/syslog-ng.service \
 	\
 	contrib/valgrind/syslog-ng.supp
+	\
+	syslog-debun \
+	README.syslog-debun
 
 if ENABLE_SYSTEMD_UNIT_INSTALL
 systemdsystemunit_DATA = contrib/systemd/syslog-ng.service
