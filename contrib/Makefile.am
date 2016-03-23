@@ -1,8 +1,5 @@
 dist_bin_SCRIPTS = contrib/syslog-debun
 
-doc_DATA += \
-	contrib/README.syslog-debun
-
 EXTRA_DIST += \
 	contrib/README \
 	\
