@@ -104,6 +104,7 @@ bin_PROGRAMS		=
 sbin_PROGRAMS		=
 libexec_PROGRAMS	=
 man_MANS		=
+doc_DATA		=
 
 INSTALL_EXEC_HOOKS	=
 UNINSTALL_HOOKS		=
