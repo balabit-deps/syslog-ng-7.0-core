@@ -1,3 +1,8 @@
+dist_bin_SCRIPTS = contrib/syslog-debun
+
+doc_DATA += \
+	contrib/README.syslog-debun
+
 EXTRA_DIST += \
 	contrib/README \
 	\
@@ -71,8 +76,8 @@ EXTRA_DIST += \
 	\
 	contrib/valgrind/syslog-ng.supp
 	\
-	syslog-debun \
-	README.syslog-debun
+	contrib/syslog-debun \
+	contrib/README.syslog-debun
 
 if ENABLE_SYSTEMD_UNIT_INSTALL
 systemdsystemunit_DATA = contrib/systemd/syslog-ng.service
