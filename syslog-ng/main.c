@@ -164,7 +164,8 @@ version(void)
          ON_OFF_STR(SYSLOG_NG_ENABLE_SPOOF_SOURCE),
          ON_OFF_STR(SYSLOG_NG_ENABLE_TCP_WRAPPER),
          ON_OFF_STR(SYSLOG_NG_ENABLE_LINUX_CAPS));
-
+  printf("Enable-FIPS: off\n");
+  printf("Enable-Systemd: %s\n", ON_OFF_STR(SYSLOG_NG_ENABLE_SYSTEMD));
 }
 
 #if SYSLOG_NG_ENABLE_LINUX_CAPS
