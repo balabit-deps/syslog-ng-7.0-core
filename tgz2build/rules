@@ -80,7 +80,7 @@ $(STAMPDIR)/stamp-install: $(STAMPDIR)/stamp-build
 
 	#Store syslog-ng build options
 	syslog-ng/syslog-ng -V \
-		| grep 'Enable' > $(ZBS_STAGE_DIR)/$(ZBS_PREFIX)/share/doc/buildopts
+		| syslog-ng/syslog-ng -V | sed -n -e '/^Enable/p' -e '/^Available/p' > $(ZBS_STAGE_DIR)/$(ZBS_PREFIX)/share/doc/buildopts
 
 	$(INSTALL) -d -m 755 $(ZBS_STAGE_DIR)/$(ZBS_PREFIX)/lib
 	$(INSTALL) -m 644 -c COPYING $(ZBS_STAGE_DIR)/$(ZBS_PREFIX)/share/doc
