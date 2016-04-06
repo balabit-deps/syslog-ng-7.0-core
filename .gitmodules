@@ -1,13 +1,13 @@
 [submodule "lib/ivykis"]
 	path = lib/ivykis
-        url = https://github.com/buytenh/ivykis.git
+	url = git@gitlab.syslog-ng.balabit:syslog-ng-team/ivykis
 [submodule "lib/jsonc"]
 	path = lib/jsonc
-	url = https://github.com/json-c/json-c.git
+	url = git@gitlab.syslog-ng.balabit:syslog-ng-team/json-c
 [submodule "modules/afamqp/rabbitmq-c"]
 	path = modules/afamqp/rabbitmq-c
-	url = https://github.com/alanxz/rabbitmq-c.git
+	url = git@gitlab.syslog-ng.balabit:syslog-ng-team/rabbitmq-c.git
 [submodule "modules/afmongodb/mongo-c-driver"]
 	path = modules/afmongodb/mongo-c-driver
-	url = https://github.com/mongodb/mongo-c-driver.git
+	url = git@gitlab.syslog-ng.balabit:syslog-ng-team/mongo-c-driver.git
 	branch = 1.2.0-dev
