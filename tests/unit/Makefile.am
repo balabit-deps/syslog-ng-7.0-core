@@ -31,7 +31,7 @@ tests_unit_test_msgsdata_LDADD		= \
 	$(TEST_LDADD) $(unit_test_extra_modules)
 
 tests_unit_test_logqueue_LDADD		= \
-	$(TEST_LDADD) $(unit_test_extra_modules)
+	$(TEST_LDADD) $(unit_test_extra_modules) $(IVYKIS_LIBS)
 
 tests_unit_test_matcher_LDADD		= \
 	$(TEST_LDADD) $(unit_test_extra_modules)
