@@ -36,7 +36,7 @@ tests_unit_TESTS			+= \
 
 tests_unit_test_logqueue_CFLAGS		= $(TEST_CFLAGS)
 tests_unit_test_logqueue_LDADD		= \
-	$(TEST_LDADD) $(unit_test_extra_modules)
+	$(TEST_LDADD) $(unit_test_extra_modules) $(IVYKIS_LIBS)
 
 tests_unit_test_matcher_CFLAGS		= $(TEST_CFLAGS)
 tests_unit_test_matcher_LDADD		= \
