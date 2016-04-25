@@ -6,3 +6,5 @@ libivykis
 libivykis-dev
 libesmtp6
 libesmtp6-dev
+libsystemd-client
+libsystemd-client-dev
