@@ -1,1 +1,1 @@
-default_opts="--enable-debug --with-libesmtp=\${prefix} --disable-amqp --with-embedded-crypto --disable-systemd"
+default_opts="--enable-debug --with-libesmtp=\${prefix} --disable-amqp --with-embedded-crypto"
