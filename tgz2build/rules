@@ -73,7 +73,7 @@ $(STAMPDIR)/stamp-install: $(STAMPDIR)/stamp-build
 	
 	# Store syslog-ng version
 	VER=`syslog-ng/syslog-ng -V | \
-		head -1 | cut -d ' ' -f 2` ; (echo "VERSION=$$VER"; echo "EDITION=pe"; echo "BUILD_ARCH=$(ZBS_ARCH)"; echo "BUILD_DIST=$(ZBS_DIST)") > \
+		head -1 | cut -d ' ' -f 2` ; (echo "VERSION=$$VER"; echo "BROCHURE_VERSION='7 pre1'"; echo "EDITION=pe"; echo "BUILD_ARCH=$(ZBS_ARCH)"; echo "BUILD_DIST=$(ZBS_DIST)") > \
 		$(ZBS_STAGE_DIR)/$(ZBS_PREFIX)/etc/install.dat
 	    
 	$(INSTALL) -d -m 755 $(ZBS_STAGE_DIR)/$(ZBS_PREFIX)/share/doc
