@@ -55,6 +55,7 @@ typedef union LogProtoServerOptionsStorage
 
 gboolean log_proto_server_options_validate(const LogProtoServerOptions *options);
 gboolean log_proto_server_options_set_encoding(LogProtoServerOptions *s, const gchar *encoding);
+
 void log_proto_server_options_defaults(LogProtoServerOptions *options);
 void log_proto_server_options_init(LogProtoServerOptions *options, GlobalConfig *cfg);
 void log_proto_server_options_destroy(LogProtoServerOptions *options);
