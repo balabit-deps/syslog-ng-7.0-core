@@ -25,9 +25,11 @@
 #include "logpipe.h"
 #include "parser/parser-expr.h"
 #include "reloc.h"
+#include "cfg.h"
 #include "contextual-data-record-scanner.h"
 #include "add-contextual-data-selector.h"
 #include "add-contextual-data-template-selector.h"
+#include "add-contextual-data-filter-selector.h"
 #include "template/templates.h"
 #include "context-info-db.h"
 #include "pathutils.h"
@@ -55,8 +57,7 @@ add_contextual_data_set_filename(LogParser *p, const gchar *filename)
 }
 
 void
-add_contextual_data_set_database_selector_template(LogParser *p,
-    const gchar *selector)
+add_contextual_data_set_database_selector_template(LogParser *p, const gchar *selector)
 {
   AddContextualData *self = (AddContextualData *) p;
   self->selector = add_contextual_data_template_selector_new(log_pipe_get_config(&p->super), selector);
@@ -72,9 +73,14 @@ add_contextual_data_set_prefix(LogParser *p, const gchar *prefix)
 }
 
 void
-add_contextual_data_set_database_default_selector(LogParser *p,
-    const gchar *
-    default_selector)
+add_contextual_data_set_filters_path(LogParser *p, const gchar *filename)
+{
+  AddContextualData *self = (AddContextualData *) p;
+  self->selector = add_contextual_data_filter_selector_new(log_pipe_get_config(&p->super), filename);
+}
+
+void
+add_contextual_data_set_database_default_selector(LogParser *p, const gchar * default_selector)
 {
   AddContextualData *self = (AddContextualData *) p;
 
@@ -89,8 +95,7 @@ _is_default_selector_set(const AddContextualData *self)
 }
 
 static void
-_add_context_data_to_message(gpointer pmsg,
-                             const ContextualDataRecord *record)
+_add_context_data_to_message(gpointer pmsg, const ContextualDataRecord *record)
 {
   LogMessage *msg = (LogMessage *) pmsg;
   log_msg_set_value_by_name(msg, record->name->str, record->value->str, record->value->len);
@@ -256,14 +261,14 @@ _first_init(AddContextualData *self)
       return FALSE;
     }
 
-  if (!add_contextual_data_selector_init(self->selector))
-    return FALSE;
-
   if (!_load_context_info_db(self))
     {
       msg_error("Failed to load the database file.");
       return FALSE;
     }
+
+  if (!add_contextual_data_selector_init(self->selector, self->context_info_db))
+    return FALSE;
 
   return TRUE;
 }
@@ -294,7 +299,6 @@ add_contextual_data_parser_new(GlobalConfig *cfg)
   self->super.super.init = _init;
   self->default_selector = NULL;
   self->prefix = NULL;
-  self->selector = NULL;
 
   return &self->super;
 }

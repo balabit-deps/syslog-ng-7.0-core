@@ -45,5 +45,6 @@ void add_contextual_data_set_database_default_selector(LogParser *p,
                                                        default_selector);
 
 void add_contextual_data_set_prefix(LogParser *p, const gchar *perfix);
+void add_contextual_data_set_filters_path(LogParser *p, const gchar *filename);
 
 #endif

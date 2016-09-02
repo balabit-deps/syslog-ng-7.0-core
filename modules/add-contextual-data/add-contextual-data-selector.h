@@ -24,6 +24,7 @@
 #define ADD_CONTEXTUAL_DATA_SELECTOR_H_INCLUDED
 
 #include "logmsg/logmsg.h"
+#include "context-info-db.h"
 
 typedef struct _AddContextualDataSelector AddContextualDataSelector;
 
@@ -31,7 +32,7 @@ struct _AddContextualDataSelector{
   gchar *(*resolve)(AddContextualDataSelector *self, LogMessage *msg);
   void (*free)(AddContextualDataSelector *self);
   AddContextualDataSelector*(*clone)(AddContextualDataSelector *self, GlobalConfig *cfg);
-  gboolean (*init)(AddContextualDataSelector *self);
+  gboolean (*init)(AddContextualDataSelector *self, ContextInfoDB *context_info_db);
 };
 
 static inline gchar*
@@ -55,11 +56,11 @@ add_contextual_data_selector_free(AddContextualDataSelector *self)
 }
 
 static inline gboolean
-add_contextual_data_selector_init(AddContextualDataSelector *self)
+add_contextual_data_selector_init(AddContextualDataSelector *self, ContextInfoDB *context_info_db)
 {
   if (self && self->init)
     {
-      return self->init(self);
+      return self->init(self, context_info_db);
     }
 
   return FALSE;
