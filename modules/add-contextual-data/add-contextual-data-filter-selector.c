@@ -1,10 +1,10 @@
 /*
  * Copyright (c) 2016 Balabit
  *
- * This program is free software; you can redistribute it and/or modify it 
+ * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published
  * by the Free Software Foundation, or (at your option) any later version.
- *  
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -91,9 +91,10 @@ _resolve(AddContextualDataSelector *s, LogMessage *msg)
 {
   AddContextualDataFilterSelector *self = (AddContextualDataFilterSelector *)s;
 
+  GList *filter_name;
   for (filter_name = self->filters_in_insertion_order; filter_name != NULL; filter_name = filter_name->next)
     {
-      FilterExprNode *filter = g_hash_table_lookup(self->filter_store, filter_name->data);  
+      FilterExprNode *filter = g_hash_table_lookup(self->filter_store, filter_name->data);
       if (filter != NULL && filter_expr_eval(filter, msg))
           return g_strdup(filter_name->data);
     }
