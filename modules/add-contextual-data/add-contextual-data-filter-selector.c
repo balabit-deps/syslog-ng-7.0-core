@@ -34,7 +34,6 @@ typedef struct _AddContextualDataFilterSelector
   gchar *filters_path;
   GlobalConfig *cfg;
   GHashTable *filter_store;
-  GList *filters_in_insertion_order;
 } AddContextualDataFilterSelector;
 
 static gboolean
@@ -51,31 +50,40 @@ _init_filters_from_file(AddContextualDataFilterSelector *self)
   return TRUE;
 }
 
+static FilterExprNode *
+_init_filter_from_log_node(GlobalConfig *cfg, LogExprNode *node)
+{
+  LogFilterPipe *filter_pipe = (LogFilterPipe *) node->children->object;
+  FilterExprNode *selected_filter = filter_expr_ref(filter_pipe->expr);
+  filter_expr_init(selected_filter, cfg);
+
+  return selected_filter;
+}
+
 static gboolean
 _populate_filter_store(AddContextualDataFilterSelector *self)
 {
-  GList *filter_name;
-  for (filter_name = self->filters_in_insertion_order; filter_name != NULL; filter_name = filter_name->next)
+  GList *objects_in_cfg = cfg_tree_get_objects(&self->cfg->tree);
+  GList *cfg_object;
+  for (cfg_object = objects_in_cfg; cfg_object != NULL; cfg_object = cfg_object->next)
     {
-      LogExprNode *node = cfg_tree_get_object(&self->cfg->tree, ENC_FILTER, filter_name->data);
-      if (!node)
-        {
-          msg_error("No such filter in database", evt_tag_str("filter", filter_name->data));
-          return FALSE;
-        }
-      LogFilterPipe *filter_pipe = (LogFilterPipe *) node->children->object;
-      FilterExprNode *selected_filter = filter_expr_ref(filter_pipe->expr);
-      filter_expr_init(selected_filter, self->cfg);
-      g_hash_table_insert(self->filter_store, filter_name->data, selected_filter);
+      LogExprNode *node = (LogExprNode *) cfg_object->data;
+      if (node->content != ENC_FILTER)
+      {
+        msg_error("Error populating filter store; non-filter object in config");
+        return FALSE;
+      }
+
+      FilterExprNode *selected_filter = _init_filter_from_log_node(self->cfg, node);
+      g_hash_table_insert(self->filter_store, node->name, selected_filter);
     }
   return TRUE;
 }
 
 static gboolean
-_init(AddContextualDataSelector *s, ContextInfoDB *context_info_db)
+_init(AddContextualDataSelector *s)
 {
   AddContextualDataFilterSelector *self = (AddContextualDataFilterSelector *)s;
-  self->filters_in_insertion_order = context_info_db_ordered_selectors(context_info_db);
 
   if (!_init_filters_from_file(self))
       return FALSE;
@@ -86,19 +94,21 @@ _init(AddContextualDataSelector *s, ContextInfoDB *context_info_db)
   return TRUE;
 }
 
-static gchar*
+static GList*
 _resolve(AddContextualDataSelector *s, LogMessage *msg)
 {
   AddContextualDataFilterSelector *self = (AddContextualDataFilterSelector *)s;
 
-  GList *filter_name;
-  for (filter_name = self->filters_in_insertion_order; filter_name != NULL; filter_name = filter_name->next)
+  GList *current_filter;
+  GList *matching_filters = NULL;
+  GList *filter_names = g_hash_table_get_keys(self->filter_store);
+  for (current_filter = filter_names; current_filter != NULL; current_filter = current_filter->next)
     {
-      FilterExprNode *filter = g_hash_table_lookup(self->filter_store, filter_name->data);
+      FilterExprNode *filter = (FilterExprNode *) g_hash_table_lookup(self->filter_store, current_filter->data);
       if (filter != NULL && filter_expr_eval(filter, msg))
-          return g_strdup(filter_name->data);
+          matching_filters = g_list_append(matching_filters, g_strdup(current_filter->data));
     }
-  return NULL;
+  return matching_filters;
 }
 
 static void
@@ -132,7 +142,6 @@ add_contextual_data_filter_selector_new(GlobalConfig *cfg, const gchar *filters_
   new_instance->filters_path = g_strdup(filters_path);
   new_instance->cfg = NULL;
   new_instance->filter_store = g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_free);
-  new_instance->filters_in_insertion_order = NULL;
 
   return &new_instance->super;
 }
