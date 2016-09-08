@@ -29,13 +29,13 @@
 typedef struct _AddContextualDataSelector AddContextualDataSelector;
 
 struct _AddContextualDataSelector{
-  gchar *(*resolve)(AddContextualDataSelector *self, LogMessage *msg);
+  GList *(*resolve)(AddContextualDataSelector *self, LogMessage *msg);
   void (*free)(AddContextualDataSelector *self);
   AddContextualDataSelector*(*clone)(AddContextualDataSelector *self, GlobalConfig *cfg);
-  gboolean (*init)(AddContextualDataSelector *self, ContextInfoDB *context_info_db);
+  gboolean (*init)(AddContextualDataSelector *self);
 };
 
-static inline gchar*
+static inline GList*
 add_contextual_data_selector_resolve(AddContextualDataSelector *self, LogMessage *msg)
 {
   if (self && self->resolve)
@@ -56,11 +56,11 @@ add_contextual_data_selector_free(AddContextualDataSelector *self)
 }
 
 static inline gboolean
-add_contextual_data_selector_init(AddContextualDataSelector *self, ContextInfoDB *context_info_db)
+add_contextual_data_selector_init(AddContextualDataSelector *self)
 {
   if (self && self->init)
     {
-      return self->init(self, context_info_db);
+      return self->init(self);
     }
 
   return FALSE;

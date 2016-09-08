@@ -108,18 +108,22 @@ _process(LogParser *s, LogMessage **pmsg,
 {
   AddContextualData *self = (AddContextualData *) s;
   LogMessage *msg = log_msg_make_writable(pmsg, path_options);
-  gchar *resolved_selector = add_contextual_data_selector_resolve(self->selector, msg);
-  const gchar *selector = resolved_selector;
+  GList* resolved_selectors = add_contextual_data_selector_resolve(self->selector, msg);
 
-  if (!context_info_db_contains(self->context_info_db, selector) && _is_default_selector_set(self))
-    selector = self->default_selector;
+  GList *current_resolved_selector;
+  for (current_resolved_selector = resolved_selectors; current_resolved_selector != NULL; current_resolved_selector = current_resolved_selector->next)
+  {
+    const gchar *selector = current_resolved_selector->data;
+    if (!context_info_db_contains(self->context_info_db, selector) && _is_default_selector_set(self))
+      selector = self->default_selector;
 
-  if (selector)
-    context_info_db_foreach_record(self->context_info_db, selector,
-                                   _add_context_data_to_message,
-                                   (gpointer) msg);
+    if (selector)
+      context_info_db_foreach_record(self->context_info_db, selector,
+                                     _add_context_data_to_message,
+                                     (gpointer) msg);
 
-  g_free(resolved_selector);
+  }
+  g_list_free(resolved_selectors);
 
   return TRUE;
 }
@@ -267,7 +271,7 @@ _first_init(AddContextualData *self)
       return FALSE;
     }
 
-  if (!add_contextual_data_selector_init(self->selector, self->context_info_db))
+  if (!add_contextual_data_selector_init(self->selector))
     return FALSE;
 
   return TRUE;
