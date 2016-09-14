@@ -39,3 +39,5 @@ m4/ax*.m4
 /lib/cfg-grammar.h
 sbuild*
 /test-driver
+!sbuild/config.yml
+srelease/dist
