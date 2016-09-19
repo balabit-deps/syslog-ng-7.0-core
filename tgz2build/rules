@@ -12,12 +12,14 @@ CONFIGURE_OPTS := --prefix $(ZBS_PREFIX) --enable-dynamic-linking --enable-sql \
 
 INSTALL:=./install-sh
 RPATH=-Wl,-R/opt/syslog-ng/lib
+OPTIMALIZATION=-O2
 
 ifneq (,$(findstring debug,$(TGZ_BUILD_OPTS)))
   CONFIGURE_OPTS += --enable-debug
 endif
 
 ifneq (,$(findstring aix,$(ZBS_DIST)))
+  OPTIMALIZATION=
   # add -Wl,-bnoquiet for ld debugging
   RPATH=-Wl,-bnolibpath,-blibpath:/opt/syslog-ng/lib:/usr/lib:/lib
 endif
@@ -54,7 +56,7 @@ $(STAMPDIR)/stamp-setup:
 
 configure: $(STAMPDIR)/stamp-configure
 $(STAMPDIR)/stamp-configure: $(STAMPDIR)/stamp-setup
-	CC=$(CC) CFLAGS="-g $(CFLAGS)" LDFLAGS="$(RPATH) $(LDFLAGS)" ./configure $(CONFIGURE_OPTS)
+	CC=$(CC) CFLAGS="$(OPTIMALIZATION) -g $(CFLAGS)" LDFLAGS="$(RPATH) $(LDFLAGS)" ./configure $(CONFIGURE_OPTS)
 	touch $@
 
 
