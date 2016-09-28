@@ -1,10 +1,10 @@
 /*
  * Copyright (c) 2016 Balabit
  *
- * This program is free software; you can redistribute it and/or modify it 
+ * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License version 2 as published
  * by the Free Software Foundation, or (at your option) any later version.
- *  
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -20,11 +20,15 @@
  *
  */
 
-#ifndef ADD_CONTEXTUAL_DATA_FILTER_SELECTOR_H_INCLUDED
-#define ADD_CONTEXTUAL_DATA_FILTER_SELECTOR_H_INCLUDED
+#ifndef ADD_CONTEXTUAL_DATA_PARSER_H_INCLUDED
+#define ADD_CONTEXTUAL_DATA_PARSER_H_INCLUDED
 
+#include "cfg-parser.h"
+#include "cfg-lexer.h"
+#include "parser/parser-expr.h"
 #include "add-contextual-data-selector.h"
 
-AddContextualDataSelector* add_contextual_data_filter_selector_new(GlobalConfig *cfg, const gchar *filters_path);
+extern CfgParser add_contextual_data_selector_filter_parser;
 
+CFG_PARSER_DECLARE_LEXER_BINDING(add_contextual_data_selector_filter_,  AddContextualDataSelector **)
 #endif

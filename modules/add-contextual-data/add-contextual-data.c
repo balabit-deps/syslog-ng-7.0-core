@@ -29,7 +29,6 @@
 #include "contextual-data-record-scanner.h"
 #include "add-contextual-data-selector.h"
 #include "add-contextual-data-template-selector.h"
-#include "add-contextual-data-filter-selector.h"
 #include "template/templates.h"
 #include "context-info-db.h"
 #include "pathutils.h"
@@ -60,6 +59,7 @@ void
 add_contextual_data_set_database_selector_template(LogParser *p, const gchar *selector)
 {
   AddContextualData *self = (AddContextualData *) p;
+  add_contextual_data_selector_free(self->selector);
   self->selector = add_contextual_data_template_selector_new(log_pipe_get_config(&p->super), selector);
 }
 
@@ -73,19 +73,20 @@ add_contextual_data_set_prefix(LogParser *p, const gchar *prefix)
 }
 
 void
-add_contextual_data_set_filters_path(LogParser *p, const gchar *filename)
-{
-  AddContextualData *self = (AddContextualData *) p;
-  self->selector = add_contextual_data_filter_selector_new(log_pipe_get_config(&p->super), filename);
-}
-
-void
 add_contextual_data_set_database_default_selector(LogParser *p, const gchar * default_selector)
 {
   AddContextualData *self = (AddContextualData *) p;
 
   g_free(self->default_selector);
   self->default_selector = g_strdup(default_selector);
+}
+
+void
+add_contextual_data_set_selector(LogParser *p, AddContextualDataSelector *selector)
+{
+  AddContextualData *self = (AddContextualData *) p;
+  
+  self->selector = selector;
 }
 
 static gboolean
@@ -162,8 +163,9 @@ _free(LogPipe *s)
   context_info_db_unref(self->context_info_db);
   g_free(self->filename);
   g_free(self->prefix);
-  log_parser_free_method(s);
+  g_free(self->default_selector);
   add_contextual_data_selector_free(self->selector);
+  log_parser_free_method(s);
 }
 
 static gboolean
@@ -280,7 +282,7 @@ _first_init(AddContextualData *self)
 static gboolean
 _init(LogPipe *s)
 {
-  AddContextualData *self = (AddContextualData *) s;
+  AddContextualData *self = (AddContextualData *)s;
 
   if (_is_initialized(self) || _first_init(self))
     return log_parser_init_method(s);
@@ -296,6 +298,7 @@ add_contextual_data_parser_new(GlobalConfig *cfg)
   log_parser_init_instance(&self->super, cfg);
 
   self->super.process = _process;
+  self->selector = NULL;
   self->context_info_db = context_info_db_new();
 
   self->super.super.clone = _clone;

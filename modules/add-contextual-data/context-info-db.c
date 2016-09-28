@@ -145,6 +145,10 @@ _free(ContextInfoDB *self)
     {
       _free_array(self->data);
     }
+  if (self->ordered_selectors)
+    {
+      g_list_free(self->ordered_selectors);
+    }
 }
 
 ContextInfoDB *
