@@ -34,6 +34,8 @@ typedef struct _MainLoopOptions
   gchar *preprocess_into;
   gboolean syntax_only;
   gboolean interactive_mode;
+  /* USED ONLY IN PREMIUM EDITION */
+  gboolean server_mode = TRUE;
 } MainLoopOptions;
 
 extern ThreadId main_thread_handle;
