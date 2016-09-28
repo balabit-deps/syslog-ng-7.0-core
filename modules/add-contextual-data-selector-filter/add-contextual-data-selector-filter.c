@@ -20,13 +20,13 @@
  *
  */
 
-#include "add-contextual-data-filter-selector.h"
+#include "add-contextual-data-selector-filter.h"
 #include "syslog-ng.h"
+#include "cfg.h"
 #include "messages.h"
 #include "filter/filter-expr.h"
 #include "filter/filter-expr-parser.h"
 #include "filter/filter-pipe.h"
-#include <stdio.h>
 
 typedef struct _AddContextualDataFilterSelector
 {
@@ -55,6 +55,7 @@ _init_filter_from_log_node(GlobalConfig *cfg, LogExprNode *node)
 {
   LogFilterPipe *filter_pipe = (LogFilterPipe *) node->children->object;
   FilterExprNode *selected_filter = filter_expr_ref(filter_pipe->expr);
+
   filter_expr_init(selected_filter, cfg);
 
   return selected_filter;
@@ -71,12 +72,15 @@ _populate_filter_store(AddContextualDataFilterSelector *self)
       if (node->content != ENC_FILTER)
       {
         msg_error("Error populating filter store; non-filter object in config");
+        g_list_free(objects_in_cfg);
         return FALSE;
       }
 
       FilterExprNode *selected_filter = _init_filter_from_log_node(self->cfg, node);
       g_hash_table_insert(self->filter_store, node->name, selected_filter);
     }
+
+  g_list_free(objects_in_cfg);
   return TRUE;
 }
 
@@ -115,8 +119,10 @@ static void
 _free(AddContextualDataSelector *s)
 {
   AddContextualDataFilterSelector *self = (AddContextualDataFilterSelector *)s;
-  cfg_free(self->cfg);
+  if (self->cfg)
+    cfg_free(self->cfg);
   g_hash_table_unref(self->filter_store);
+  g_free(self->filters_path);
   g_free(self);
 }
 
@@ -124,14 +130,13 @@ static AddContextualDataSelector *
 _clone(AddContextualDataSelector *s, GlobalConfig *cfg)
 {
   AddContextualDataFilterSelector *self = (AddContextualDataFilterSelector *)s;
-  AddContextualDataFilterSelector *cloned = (AddContextualDataFilterSelector *)add_contextual_data_filter_selector_new(cfg, self->filters_path);
-  cloned->filter_store = g_hash_table_ref(self->filter_store);
+  AddContextualDataFilterSelector *cloned = (AddContextualDataFilterSelector *)add_contextual_data_selector_filter_new(cfg, self->filters_path);
 
   return &cloned->super;
 }
 
 AddContextualDataSelector*
-add_contextual_data_filter_selector_new(GlobalConfig *cfg, const gchar *filters_path)
+add_contextual_data_selector_filter_new(GlobalConfig *cfg, const gchar *filters_path)
 {
   AddContextualDataFilterSelector *new_instance = g_new0(AddContextualDataFilterSelector, 1);
   new_instance->super.resolve = _resolve;

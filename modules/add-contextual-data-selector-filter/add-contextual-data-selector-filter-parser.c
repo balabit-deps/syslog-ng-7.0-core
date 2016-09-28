@@ -20,40 +20,36 @@
  *
  */
 
-#include "add-contextual-data.h"
+#include "add-contextual-data-selector-filter.h"
 #include "cfg-lexer.h"
 #include "cfg-parser.h"
-#include "add-contextual-data-grammar.h"
+#include "add-contextual-data-selector-filter-grammar.h"
 #include "logpipe.h"
 #include "parser/parser-expr.h"
 #include "syslog-ng-config.h"
 #include <glib.h>
 
-extern int add_contextual_data_debug;
+extern int add_contextual_data_selector_filter_debug;
 
-int add_contextual_data_parse(CfgLexer *lexer, LogParser **instance,
+int add_contextual_data_selector_filter_parse(CfgLexer *lexer, AddContextualDataSelector **instance,
                               gpointer arg);
 
 static CfgLexerKeyword add_contextual_data_keywords[] =
 {
-  {"add_contextual_data", KW_ADD_CONTEXTUAL_DATA},
-  {"database", KW_ADD_CONTEXTUAL_DATA_DATABASE},
-  {"selector", KW_ADD_CONTEXTUAL_DATA_SELECTOR},
-  {"default_selector", KW_ADD_CONTEXTUAL_DATA_DEFAULT_SELECTOR},
-  {"prefix", KW_ADD_CONTEXTUAL_DATA_PREFIX},
+  {"filters", KW_ADD_CONTEXTUAL_DATA_FILTERS},
   {NULL}
 };
 
-CfgParser add_contextual_data_parser =
+CfgParser add_contextual_data_selector_filter_parser =
 {
 #if SYSLOG_NG_ENABLE_DEBUG
-  .debug_flag = &add_contextual_data_debug,
+  .debug_flag = &add_contextual_data_selector_filter_debug,
 #endif
-  .name = "add-contextual-data",
+  .name = "add_contextual_data_selector_filter",
   .keywords = add_contextual_data_keywords,
   .parse =
-  (gint(*)(CfgLexer *, gpointer *, gpointer)) add_contextual_data_parse,
+  (gint(*)(CfgLexer *, gpointer *, gpointer)) add_contextual_data_selector_filter_parse,
   .cleanup = (void (*)(gpointer)) log_pipe_unref,
 };
 
-CFG_PARSER_IMPLEMENT_LEXER_BINDING(add_contextual_data_, LogParser **)
+CFG_PARSER_IMPLEMENT_LEXER_BINDING(add_contextual_data_selector_filter_, AddContextualDataSelector **)
