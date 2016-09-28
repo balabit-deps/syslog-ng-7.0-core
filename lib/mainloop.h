@@ -29,6 +29,7 @@
 
 
 extern gboolean syntax_only;
+extern gboolean server_mode;
 extern gboolean __main_loop_is_terminating;
 extern ThreadId main_thread_handle;
 
