@@ -34,7 +34,6 @@ include modules/native/Makefile.am
 include modules/cef/Makefile.am
 include modules/diskq/Makefile.am
 include modules/add-contextual-data/Makefile.am
-include modules/add-contextual-data-selector-filter/Makefile.am
 
 SYSLOG_NG_CORE_JAR=$(top_builddir)/modules/java/syslog-ng-core/libs/syslog-ng-core.jar
 
@@ -46,7 +45,7 @@ SYSLOG_NG_MODULES	=	\
 	mod-basicfuncs mod-cryptofuncs mod-geoip mod-afstomp \
 	mod-redis mod-pseudofile mod-graphite mod-riemann \
 	mod-python mod-java mod-java-modules mod-kvformat mod-date \
-	mod-native mod-cef mod-add-contextual-data mod-diskq mod-add-contextual-selector-filter
+	mod-native mod-cef mod-add-contextual-data mod-diskq
 
 
 modules modules/: ${SYSLOG_NG_MODULES}
@@ -61,6 +60,6 @@ modules_test_subdirs	=	\
 	modules_cryptofuncs modules_geoip modules_afstomp \
 	modules_graphite modules_riemann modules_python \
 	modules_systemd_journal modules_kvformat modules_date \
-	modules_cef modules_diskq modules-add-contextual-data modules-add-contextual-data-selector-filter
+	modules_cef modules_diskq modules-add-contextual-data
 
 .PHONY: modules modules/
