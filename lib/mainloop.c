@@ -98,6 +98,9 @@ static gchar *preprocess_into = NULL;
 gboolean syntax_only = FALSE;
 gboolean interactive_mode = FALSE;
 
+/* USED ONLY IN PREMIUM EDITION */
+gboolean server_mode = FALSE;
+
 /*
  * This variable is used to detect that syslog-ng is being terminated, in which
  * case ongoing reload operations are aborted.
