@@ -339,7 +339,7 @@ log_source_queue(LogPipe *s, LogMessage *msg, const LogPathOptions *path_options
   /* message setup finished, send it out */
 
   if (!_invoke_mangle_callbacks(s, msg, path_options))
-    return FALSE;
+    return;
 
   stats_counter_inc(self->recvd_messages);
   stats_counter_set(self->last_message_seen, msg->timestamps[LM_TS_RECVD].tv_sec);
