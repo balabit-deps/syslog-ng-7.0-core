@@ -28,3 +28,9 @@ Description: Next generation logging daemon dev package
    * filtering based on message content
    * portability
    * better network forwarding
+
+Package: syslog-ng-dbg
+Architecture: any
+Depends: syslog-ng
+Section: libdevel
+Description: Debug symbols for syslog-ng
