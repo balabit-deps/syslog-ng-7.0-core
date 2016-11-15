@@ -65,7 +65,7 @@
 #define VERSION_3_8 "syslog-ng PE 7.0"
 
 #define VERSION_VALUE   0x0700
-#define VERSION_CURRENT VERSION_PE_7_0
+#define VERSION_CURRENT VERSION_3_8
 #define VERSION_CURRENT_VER_ONLY "7.0"
 
 #endif
