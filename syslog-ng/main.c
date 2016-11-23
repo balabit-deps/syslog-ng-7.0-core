@@ -1,26 +1,26 @@
 /*
- * Copyright (c) 2002-2012 Balabit
- * Copyright (c) 1998-2012 Balázs Scheidler
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
- *
- * As an additional exemption you are allowed to compile & link against the
- * OpenSSL libraries as published by the OpenSSL project. See the file
- * COPYING for details.
- *
- */
+* Copyright (c) 2002-2012 Balabit
+* Copyright (c) 1998-2012 Balázs Scheidler
+*
+* This library is free software; you can redistribute it and/or
+* modify it under the terms of the GNU Lesser General Public
+* License as published by the Free Software Foundation; either
+* version 2.1 of the License, or (at your option) any later version.
+*
+* This library is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+* Lesser General Public License for more details.
+*
+* You should have received a copy of the GNU Lesser General Public
+* License along with this library; if not, write to the Free Software
+* Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+*
+* As an additional exemption you are allowed to compile & link against the
+* OpenSSL libraries as published by the OpenSSL project. See the file
+* COPYING for details.
+*
+*/
 
 #include "syslog-ng.h"
 #include "cfg.h"
@@ -70,7 +70,7 @@ extern int cfg_parser_debug;
 
 static GOptionEntry syslogng_options[] =
 {
-  { "version",           'V',         0, G_OPTION_ARG_NONE, &display_version, "Display version number (" SYSLOG_NG_PACKAGE_NAME "-premium-edition 7 (" SYSLOG_NG_VERSION "))", NULL },
+  { "version",           'V',         0, G_OPTION_ARG_NONE, &display_version, "Display version number (" SYSLOG_NG_PACKAGE_NAME " " SYSLOG_NG_COMBINED_VERSION ")", NULL },
   { "module-path",         0,         0, G_OPTION_ARG_STRING, &resolvedConfigurablePaths.initial_module_path, "Set the list of colon separated directories to search for modules, default=" SYSLOG_NG_MODULE_PATH, "<path>" },
   { "module-registry",     0,         0, G_OPTION_ARG_NONE, &display_module_registry, "Display module information", NULL },
   { "seed",              'S',         0, G_OPTION_ARG_NONE, &dummy, "Does nothing, the need to seed the random generator is autodetected", NULL},
@@ -127,7 +127,7 @@ version(void)
     {
       installer_version = SYSLOG_NG_VERSION;
     }
-  printf(SYSLOG_NG_PACKAGE_NAME "-premium-edition 7 (" SYSLOG_NG_VERSION ")\n"
+  printf(SYSLOG_NG_PACKAGE_NAME " " SYSLOG_NG_COMBINED_VERSION "\n"
          "Installer-Version: %s\n"
          "Revision: " SYSLOG_NG_SOURCE_REVISION "\n",
          installer_version);
