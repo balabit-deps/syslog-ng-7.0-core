@@ -1,4 +1,4 @@
-Source: syslog-ng
+Source: syslog-ng-premium-edition
 Section: admin
 Priority: extra
 Maintainer: SZALAY Attila <sasa@debian.org>
