@@ -24,6 +24,7 @@
 #include "afsmtp.h"
 #include "afsmtp-parser.h"
 #include "plugin.h"
+#include "mainloop.h"
 #include "messages.h"
 #include "stats/stats-registry.h"
 #include "logqueue.h"
@@ -611,8 +612,9 @@ afsmtp_dd_init(LogPipe *s)
 {
   AFSMTPDriver *self = (AFSMTPDriver *)s;
   GlobalConfig *cfg = log_pipe_get_config(s);
+  MainLoop *main_loop = main_loop_get_instance();
 
-  if (!server_mode)
+  if (!main_loop_is_server_mode(main_loop))
     {
       msg_error("syslog-ng running in client/relay mode, SMTP destination is unavailable", NULL);
       return FALSE;
