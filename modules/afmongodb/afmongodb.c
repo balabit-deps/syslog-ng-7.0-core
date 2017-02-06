@@ -24,6 +24,7 @@
 
 #include "afmongodb.h"
 #include "afmongodb-parser.h"
+#include "mainloop.h"
 #include "messages.h"
 #include "stats/stats-registry.h"
 #include "logmsg/nvtable.h"
@@ -525,8 +526,9 @@ _init(LogPipe *s)
 {
   MongoDBDestDriver *self = (MongoDBDestDriver *)s;
   GlobalConfig *cfg = log_pipe_get_config(s);
+  MainLoop* main_loop = main_loop_get_instance();
 
-  if (!server_mode)
+  if (!main_loop_is_server_mode(main_loop))
     {
       msg_error("syslog-ng running in client/relay mode, MongoDB destination is unavailable", NULL);
       return FALSE;
