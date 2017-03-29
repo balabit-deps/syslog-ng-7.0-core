@@ -41,7 +41,7 @@ enum
   /* direction bits, used to distinguish between source/destination drivers */
   SCS_SOURCE         = 0x0100,
   SCS_DESTINATION    = 0x0200,
-  
+
   /* drivers, this should be registered dynamically */
   SCS_FILE           = 1,
   SCS_PIPE           = 2,
@@ -79,6 +79,7 @@ enum
   SCS_JOURNALD       = 34,
   SCS_JAVA           = 35,
   SCS_HTTP           = 36,
+  SCS_MONITORING     = 37,
   SCS_MAX,
   SCS_SOURCE_MASK    = 0xff
 };

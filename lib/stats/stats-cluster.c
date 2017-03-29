@@ -95,7 +95,8 @@ _get_module_name(gint source)
     "riemann",
     "journald",
     "java",
-    "http"
+    "http",
+    "monitoring"
   };
   return module_names[source & SCS_SOURCE_MASK];
 }
