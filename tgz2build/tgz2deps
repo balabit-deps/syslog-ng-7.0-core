@@ -8,3 +8,6 @@ libesmtp6
 libesmtp6-dev
 libsystemd-client
 libsystemd-client-dev
+libmaxminddb
+mongo-c-driver
+libcurl
