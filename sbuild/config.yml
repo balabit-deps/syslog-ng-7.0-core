@@ -1,6 +1,6 @@
 name: syslog-ng-premium-edition
 builder:
   name: SyslogNgBuilder
-  configure_options: --disable-forced-server-mode --with-package-name=syslog-ng-premium-edition --enable-dynamic-linking --disable-debug --with-libesmtp=\${prefix} --disable-amqp --with-embedded-crypto --with-ivykis=system
+  configure_options: --disable-forced-server-mode --with-package-name=syslog-ng-premium-edition --enable-dynamic-linking --disable-debug --with-libesmtp=\${prefix} --with-embedded-crypto --with-ivykis=system --with-librabbitmq-client=system
 platforms:
   - linux-glibc2.11/amd64
