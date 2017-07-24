@@ -11,3 +11,4 @@ libsystemd-client-dev
 libmaxminddb
 mongo-c-driver
 libcurl
+librabbitmq-c
