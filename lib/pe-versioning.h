@@ -30,7 +30,6 @@
  * should reference the syslog-ng version number through these macros, in order
  * to make it relatively simple to explain PE/OSE version numbers to users. */
 
-#if (SYSLOG_NG_USE_PE_VERSION_MAPPING)
 #if defined(__VERSIONING_H__)
 #undef VERSION_3_0
 #undef VERSION_3_1
@@ -68,5 +67,4 @@
 #define VERSION_CURRENT VERSION_3_10
 #define VERSION_CURRENT_VER_ONLY "7.0"
 
-#endif
 #endif
