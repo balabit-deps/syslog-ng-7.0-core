@@ -45,8 +45,14 @@
 #undef VERSION_3_8
 #undef VERSION_3_9
 #undef VERSION_3_10
+#undef VERSION_3_11
+#undef VERSION_3_12
+#undef VERSION_3_13
+#undef VERSION_3_14
+#undef VERSION_3_15
+#undef VERSION_3_16
 
-#undef VERSION_VALUE_3_10
+#undef VERSION_VALUE_3_16
 #undef VERSION_VALUE
 #undef VERSION_CURRENT
 #undef VERSION_CURRENT_VER_ONLY
@@ -66,10 +72,16 @@
 #define VERSION_3_8 "syslog-ng PE 7.0"
 #define VERSION_3_9 "syslog-ng PE 7.0"
 #define VERSION_3_10 "syslog-ng PE 7.0"
+#define VERSION_3_11 "syslog-ng PE 7.0"
+#define VERSION_3_12 "syslog-ng PE 7.0"
+#define VERSION_3_13 "syslog-ng PE 7.0"
+#define VERSION_3_14 "syslog-ng PE 7.0"
+#define VERSION_3_15 "syslog-ng PE 7.0"
+#define VERSION_3_16 "syslog-ng PE 7.0"
 
-#define VERSION_VALUE_3_10 0x0700
+#define VERSION_VALUE_3_16 0x0700
 #define VERSION_VALUE   0x0700
-#define VERSION_CURRENT VERSION_3_10
+#define VERSION_CURRENT VERSION_3_16
 #define VERSION_CURRENT_VER_ONLY "7.0"
 
 #endif
