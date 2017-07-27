@@ -24,10 +24,18 @@
 #define AFFILE_DEST_INTERNAL_QUEUE_FILTER_H_INCLUDED
 
 #include "syslog-ng.h"
+#include "mainloop.h"
 
 static inline gboolean
-affile_dw_queue_enabled_for_msg(LogMessage *msg)
+affile_dw_queue_enabled_for_msg(LogMessage *lm)
 {
+  MainLoop *main_loop = main_loop_get_instance();
+
+  if (!main_loop_is_server_mode(main_loop) && lm->saddr && lm->saddr->sa.sa_family != AF_UNIX)
+    {
+      msg_error("syslog-ng running in client/relay mode, network messages cannot be written to files", NULL);
+      return FALSE;
+    }
   return TRUE;
 }
 
