@@ -1,4 +1,3 @@
-apply from: 'internal_repositories.gradle'
 project.buildDir = syslogBuildDir
 
 subprojects {
@@ -14,10 +13,13 @@ subprojects {
             dirs syslogDepsDir
             dirs syslogBuildDir + '/common/gradle/libs'
         }
-      mavenCentral()
-      maven {
-        url "http://maven.elasticsearch.org/releases"
-      }
+        maven {
+           url "http://archiva.syslog-ng.balabit:8080/repository/internal/"
+           credentials {
+               username "testbot"
+               password "titkos12"
+           }
+        }
     }
 
     compileJava {
