@@ -31,6 +31,9 @@
  * to make it relatively simple to explain PE/OSE version numbers to users. */
 
 #if defined(__VERSIONING_H__)
+#undef PRODUCT_DOCUMENTATION
+#undef PRODUCT_CONTACT
+
 #undef VERSION_3_0
 #undef VERSION_3_1
 #undef VERSION_3_2
@@ -49,6 +52,8 @@
 #undef VERSION_CURRENT_VER_ONLY
 #endif
 
+#define PRODUCT_DOCUMENTATION "https://support.oneidentity.com/syslog-ng-premium-edition/technical-documents"
+#define PRODUCT_CONTACT "https://support.oneidentity.com/syslog-ng-premium-edition/"
 
 #define VERSION_3_0 "syslog-ng PE 3.0"
 #define VERSION_3_1 "syslog-ng PE 4.0"
