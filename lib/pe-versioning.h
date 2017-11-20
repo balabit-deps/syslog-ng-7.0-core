@@ -31,6 +31,9 @@
  * to make it relatively simple to explain PE/OSE version numbers to users. */
 
 #if defined(__VERSIONING_H__)
+#undef PRODUCT_NAME
+#undef PRODUCT_CONTACT
+
 #undef VERSION_3_0
 #undef VERSION_3_1
 #undef VERSION_3_2
@@ -51,6 +54,8 @@
 #undef VERSION_CURRENT_VER_ONLY
 #endif
 
+#define PRODUCT_NAME "syslog-ng-pe"
+#define PRODUCT_CONTACT "https://support.balabit.com/"
 
 #define VERSION_3_0 "syslog-ng PE 3.0"
 #define VERSION_3_1 "syslog-ng PE 4.0"
