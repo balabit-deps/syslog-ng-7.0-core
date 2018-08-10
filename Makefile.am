@@ -215,6 +215,8 @@ include packaging/debian/Makefile.am
 include dbld/Makefile.am
 include cmake/Makefile.am
 include dev-utils/plugin_skeleton_creator/Makefile.am
+include debian/Makefile.am
+include tgz2build/Makefile.am
 
 TEST_EXTENSIONS = .sh
 @VALGRIND_CHECK_RULES@
