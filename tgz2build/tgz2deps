@@ -1,0 +1,15 @@
+libpcre3-dev
+libpcre3
+libjsonc-dev
+libjsonc0
+libivykis
+libivykis-dev
+libesmtp6
+libesmtp6-dev
+libsystemd-client
+libsystemd-client-dev
+libmaxminddb
+mongo-c-driver
+libcurl
+librabbitmq-c
+libcap-dev
