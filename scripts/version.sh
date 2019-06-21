@@ -24,10 +24,5 @@
 
 BASEDIR=$(dirname "$0")
 
-cd $BASEDIR/../
+cat $BASEDIR/../VERSION
 
-if [ -d .git ] && GIT_VERSION=$(git describe --tags --dirty --abbrev=7); then
-  echo $GIT_VERSION | sed 's/^syslog-ng-//' | tr '-' '.' | tr -d '\n'
-else
-  cat VERSION | tr -d '\n'
-fi
