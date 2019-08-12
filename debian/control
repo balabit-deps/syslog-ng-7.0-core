@@ -1,0 +1,15 @@
+Source: syslog-ng-premium-edition
+Maintainer: syslog-ng team <syslog-ng-room@balabit.com>
+Standards-Version: 3.6.1
+
+Package: syslog-ng
+Architecture: any
+Description: syslog-ng
+
+Package: syslog-ng-dev
+Architecture: any
+Description: syslog-ng-dev
+
+Package: syslog-ng-dbg
+Architecture: any
+Description: syslog-ng-dbg
