@@ -5,4 +5,3 @@ builder:
   make_options: -j4
 platforms:
   - linux-glibc2.11/amd64
-  - ubuntu-bionic/amd64
