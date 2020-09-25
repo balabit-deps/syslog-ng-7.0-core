@@ -238,8 +238,8 @@ struct _NVTable
    * versions, but index_size is a more descriptive name */
   guint16 index_size;
   guint8 num_static_entries;
+  guint8 borrowed;
   GAtomicCounter ref_cnt;
-  gboolean borrowed;
 
   /* variable data, see memory layout in the comment above */
   union
