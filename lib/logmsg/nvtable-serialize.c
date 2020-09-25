@@ -44,6 +44,12 @@ typedef struct _NVTableMetaData
  **********************************************************************/
 
 static gboolean
+nv_table_version_eq(guint32 magic, const gchar *version)
+{
+  return memcmp((void *)&magic, version, 4) == 0;
+}
+
+static gboolean
 _deserialize_static_entries(SerializeArchive *sa, NVTable *res)
 {
   if (!serialize_read_uint32_array(sa, res->static_entries, res->num_static_entries))
@@ -104,7 +110,8 @@ _read_metadata(SerializeArchive *sa, NVTableMetaData *meta_data)
       meta_data->magic = GUINT32_SWAP_LE_BE(meta_data->magic);
     }
 
-  if (memcmp((void *)&meta_data->magic, (const void *)NV_TABLE_MAGIC_V2, 4) != 0)
+  if (!nv_table_version_eq(meta_data->magic, NV_TABLE_MAGIC_V2) &&
+      !nv_table_version_eq(meta_data->magic, NV_TABLE_MAGIC_V3))
     {
       return FALSE;
     }
@@ -112,7 +119,7 @@ _read_metadata(SerializeArchive *sa, NVTableMetaData *meta_data)
 }
 
 static gboolean
-_read_header(SerializeArchive *sa, NVTable **nvtable)
+_read_header(SerializeArchive *sa, NVTableMetaData meta_data, NVTable **nvtable)
 {
   NVTable *res = NULL;
   guint32 size;
@@ -124,6 +131,9 @@ _read_header(SerializeArchive *sa, NVTable **nvtable)
 
   if (size > NV_TABLE_MAX_BYTES)
     goto error;
+
+  if (nv_table_version_eq(meta_data.magic, NV_TABLE_MAGIC_V2))
+    size += 4;
 
   res = (NVTable *) g_malloc(size);
   res->size = size;
@@ -176,7 +186,7 @@ nv_table_deserialize(LogMessageSerializationState *state)
   if (!_read_metadata(sa, &meta_data))
     goto error;
 
-  if (!_read_header(sa, &res))
+  if (!_read_header(sa, meta_data, &res))
     goto error;
 
   state->nvtable_flags = meta_data.flags;
@@ -224,7 +234,7 @@ _write_meta_data(SerializeArchive *sa, NVTableMetaData *meta_data)
 static void
 _fill_meta_data(NVTable *self, NVTableMetaData *meta_data)
 {
-  memcpy((void *)&meta_data->magic, (const void *) NV_TABLE_MAGIC_V2, 4);
+  memcpy((void *)&meta_data->magic, (const void *) NV_TABLE_MAGIC_V3, 4);
   if (G_BYTE_ORDER == G_BIG_ENDIAN)
     meta_data->flags |= NVT_SF_BE;
   meta_data->flags |= NVT_SUPPORTS_UNSET;

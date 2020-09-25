@@ -31,8 +31,11 @@
 #include "logmsg/serialization.h"
 
 #define NV_TABLE_MAGIC_V2  "NVT2"
+#define NV_TABLE_MAGIC_V3  "NVT3"
 #define NVT_SF_BE           0x1
 #define NVT_SUPPORTS_UNSET  0x2
+
+#define NV_TABLE_HEADER_DIFF_MAGIC_V2_V3 4
 
 NVTable *nv_table_deserialize(LogMessageSerializationState *state);
 gboolean nv_table_serialize(LogMessageSerializationState *state, NVTable *self);

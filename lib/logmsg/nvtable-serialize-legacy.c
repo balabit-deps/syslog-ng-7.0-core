@@ -24,6 +24,7 @@
  *
  */
 
+#include "nvtable-serialize.h"
 #include "nvtable-serialize-legacy.h"
 #include "nvtable-serialize-endianutils.h"
 #include "syslog-ng.h"
@@ -128,7 +129,7 @@ _calculate_new_size(NVTable *self)
   return self->size + NV_TABLE_HEADER_DIFF_V22_V26
          + NV_TABLE_HANDLE_DIFF_V22_V26 * self->num_static_entries
          + NV_TABLE_DYNVALUE_DIFF_V22_V26 * self->index_size
-         + diff_of_old_used_and_new_used;
+         + diff_of_old_used_and_new_used + NV_TABLE_HEADER_DIFF_MAGIC_V2_V3;
 }
 
 static inline NVEntry *
@@ -447,6 +448,7 @@ nv_table_deserialize_legacy(SerializeArchive *sa)
     }
   g_free(tmp);
 
+  res->size += NV_TABLE_HEADER_DIFF_MAGIC_V2_V3;
   res = (NVTable *)g_try_realloc(res, res->size);
 
   if (!res)
