@@ -14,3 +14,5 @@ mongo-c-driver
 libcurl
 librabbitmq-c
 libcap-dev
+librdkafka
+librdkafka-dev
