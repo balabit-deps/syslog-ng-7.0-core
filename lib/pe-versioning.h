@@ -80,6 +80,8 @@
 #undef VERSION_4_1
 #undef VERSION_4_2
 
+#undef VERSION_VALUE_4_0
+#undef VERSION_VALUE_4_1
 #undef VERSION_VALUE_4_2
 
 #undef VERSION_VALUE_CURRENT
@@ -145,6 +147,8 @@
 #define VERSION_4_1 "syslog-ng PE 8.0"
 #define VERSION_4_2 "syslog-ng PE 8.0"
 
+#define VERSION_VALUE_4_0 0x0800
+#define VERSION_VALUE_4_1 0x0800
 #define VERSION_VALUE_4_2 0x0800
 
 /* config version code, in the same format as GlobalConfig->version */
