@@ -71,20 +71,29 @@
 #undef VERSION_3_34
 #undef VERSION_3_35
 #undef VERSION_3_36
+#undef VERSION_3_37
+#undef VERSION_3_38
+
+#undef VERSION_VALUE_3_38
 
 #undef VERSION_4_0
+#undef VERSION_4_1
+#undef VERSION_4_2
 
-#undef VERSION_VALUE_3_36
-#undef VERSION_VALUE_4_0
+#undef VERSION_VALUE_4_2
+
 #undef VERSION_VALUE_CURRENT
-
-#undef VERSION_VALUE_NEXT_MAJOR
-#undef FEATURE_TYPING_MIN_VERSION
-
-#undef VERSION_PRODUCT_CURRENT
 #undef VERSION_STR_CURRENT
+#undef VERSION_PRODUCT_CURRENT
+
 #undef VERSION_VALUE_LAST_SEMANTIC_CHANGE
 #undef VERSION_STR_LAST_SEMANTIC_CHANGE
+
+#undef VERSION_VALUE_NEXT_MAJOR
+
+#undef FEATURE_TYPING_MIN_VERSION
+#undef FEATURE_TYPING_VERSION
+
 #endif
 
 #define PRODUCT_DOCUMENTATION "https://support.oneidentity.com/syslog-ng-premium-edition/technical-documents"
@@ -127,20 +136,37 @@
 #define VERSION_3_34 "syslog-ng PE 7.0"
 #define VERSION_3_35 "syslog-ng PE 7.0"
 #define VERSION_3_36 "syslog-ng PE 7.0"
+#define VERSION_3_37 "syslog-ng PE 7.0"
+#define VERSION_3_38 "syslog-ng PE 7.0"
+
+#define VERSION_VALUE_3_38 0x0700
 
 #define VERSION_4_0 "syslog-ng PE 8.0"
+#define VERSION_4_1 "syslog-ng PE 8.0"
+#define VERSION_4_2 "syslog-ng PE 8.0"
 
-#define VERSION_VALUE_4_0 0x0800
-#define VERSION_VALUE_NEXT_MAJOR 0x0800
-#define FEATURE_TYPING_MIN_VERSION 0x0800
+#define VERSION_VALUE_4_2 0x0800
 
-#define VERSION_VALUE_3_36 0x0700
-#define VERSION_VALUE_CURRENT   0x0700
-#define VERSION_PRODUCT_CURRENT "syslog-ng PE 7.0"
+/* config version code, in the same format as GlobalConfig->version */
+#define VERSION_VALUE_CURRENT VERSION_VALUE_3_38
 #define VERSION_STR_CURRENT "7.0"
+#define VERSION_PRODUCT_CURRENT VERSION_3_38
 
-#define VERSION_VALUE_LAST_SEMANTIC_CHANGE 0x0700
+/* this value points to the last syslog-ng version where we changed the
+ * meaning of any setting in the configuration file.  Basically, it is the
+ * highest value passed to any cfg_is_config_version_older() call.
+ */
+#define VERSION_VALUE_LAST_SEMANTIC_CHANGE VERSION_VALUE_3_38
 #define VERSION_STR_LAST_SEMANTIC_CHANGE "7.0"
 
+/* version based feature flips */
+#define VERSION_VALUE_NEXT_MAJOR VERSION_VALUE_4_2
+
+/* When we are over 4.0 (8.0) which introduced FEATURE_TYPING_MIN_VERSION, we should
+ * set min_version to an extremal value (0).  We should remove this macro if all
+ * derived works introduce typing support.  Until that point we keep it
+ * here, so the same codebase can execute with typing disabled. */
+#define FEATURE_TYPING_MIN_VERSION VERSION_VALUE_4_2
+#define FEATURE_TYPING_VERSION "syslog-ng PE 8.0"
 
 #endif
