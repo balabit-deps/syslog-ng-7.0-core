@@ -1,0 +1,9 @@
+@PACKAGE_NAME@ (@PACKAGE_VERSION@) @RELEASE_TAG@; urgency=low
+
+  * New upstream version.
+
+ -- One Identity LLC. <root@vasuberbuilder2.prod.quest.corp>  @CURRDATE@
+
+Local variables:
+mode: debian-changelog
+End:
