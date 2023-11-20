@@ -1,6 +1,5 @@
 /*
- * Copyright (c) 2017 Balabit
- * Copyright (c) 2017 Laszlo Budai
+ * Copyright (c) 2002-2017 Balabit
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -22,3 +21,156 @@
  *
  */
 
+#ifndef __PE_VERSIONING_H__
+#define __PE_VERSIONING_H__
+
+#include "syslog-ng-config.h"
+
+/* version references for major syslog-ng OSE versions. All error messages
+ * should reference the syslog-ng version number through these macros, in order
+ * to make it relatively simple to explain PE/OSE version numbers to users. */
+
+#if defined(__VERSIONING_H__)
+#undef PRODUCT_DOCUMENTATION
+#undef PRODUCT_CONTACT
+
+#undef VERSION_3_0
+#undef VERSION_3_1
+#undef VERSION_3_2
+#undef VERSION_3_3
+#undef VERSION_3_4
+#undef VERSION_3_5
+#undef VERSION_3_6
+#undef VERSION_3_7
+#undef VERSION_3_8
+#undef VERSION_3_9
+#undef VERSION_3_10
+#undef VERSION_3_11
+#undef VERSION_3_12
+#undef VERSION_3_13
+#undef VERSION_3_14
+#undef VERSION_3_15
+#undef VERSION_3_16
+#undef VERSION_3_17
+#undef VERSION_3_18
+#undef VERSION_3_19
+#undef VERSION_3_20
+#undef VERSION_3_21
+#undef VERSION_3_22
+#undef VERSION_3_23
+#undef VERSION_3_24
+#undef VERSION_3_25
+#undef VERSION_3_26
+#undef VERSION_3_27
+#undef VERSION_3_28
+#undef VERSION_3_29
+#undef VERSION_3_30
+#undef VERSION_3_31
+#undef VERSION_3_32
+#undef VERSION_3_33
+#undef VERSION_3_34
+#undef VERSION_3_35
+#undef VERSION_3_36
+#undef VERSION_3_37
+#undef VERSION_3_38
+
+#undef VERSION_VALUE_3_38
+
+#undef VERSION_4_0
+#undef VERSION_4_1
+#undef VERSION_4_2
+
+#undef VERSION_VALUE_4_0
+#undef VERSION_VALUE_4_1
+#undef VERSION_VALUE_4_2
+
+#undef VERSION_VALUE_CURRENT
+#undef VERSION_STR_CURRENT
+#undef VERSION_PRODUCT_CURRENT
+
+#undef VERSION_VALUE_LAST_SEMANTIC_CHANGE
+#undef VERSION_STR_LAST_SEMANTIC_CHANGE
+
+#undef VERSION_VALUE_NEXT_MAJOR
+
+#undef FEATURE_TYPING_MIN_VERSION
+#undef FEATURE_TYPING_VERSION
+
+#endif
+
+#define PRODUCT_DOCUMENTATION "https://support.oneidentity.com/syslog-ng-premium-edition/technical-documents"
+#define PRODUCT_CONTACT "https://support.oneidentity.com/syslog-ng-premium-edition/"
+
+#define VERSION_3_0 "syslog-ng PE 3.0"
+#define VERSION_3_1 "syslog-ng PE 4.0"
+#define VERSION_3_2 "syslog-ng PE 4.0"
+#define VERSION_3_3 "syslog-ng PE 4.1"
+#define VERSION_3_4 "syslog-ng 3.4"
+#define VERSION_3_5 "syslog-ng 3.5"
+#define VERSION_3_6 "syslog-ng 3.6"
+#define VERSION_3_7 "syslog-ng 3.7"
+#define VERSION_3_8 "syslog-ng PE 7.0"
+#define VERSION_3_9 "syslog-ng PE 7.0"
+#define VERSION_3_10 "syslog-ng PE 7.0"
+#define VERSION_3_11 "syslog-ng PE 7.0"
+#define VERSION_3_12 "syslog-ng PE 7.0"
+#define VERSION_3_13 "syslog-ng PE 7.0"
+#define VERSION_3_14 "syslog-ng PE 7.0"
+#define VERSION_3_15 "syslog-ng PE 7.0"
+#define VERSION_3_16 "syslog-ng PE 7.0"
+#define VERSION_3_17 "syslog-ng PE 7.0"
+#define VERSION_3_18 "syslog-ng PE 7.0"
+#define VERSION_3_19 "syslog-ng PE 7.0"
+#define VERSION_3_20 "syslog-ng PE 7.0"
+#define VERSION_3_21 "syslog-ng PE 7.0"
+#define VERSION_3_22 "syslog-ng PE 7.0"
+#define VERSION_3_23 "syslog-ng PE 7.0"
+#define VERSION_3_24 "syslog-ng PE 7.0"
+#define VERSION_3_25 "syslog-ng PE 7.0"
+#define VERSION_3_26 "syslog-ng PE 7.0"
+#define VERSION_3_27 "syslog-ng PE 7.0"
+#define VERSION_3_28 "syslog-ng PE 7.0"
+#define VERSION_3_29 "syslog-ng PE 7.0"
+#define VERSION_3_30 "syslog-ng PE 7.0"
+#define VERSION_3_31 "syslog-ng PE 7.0"
+#define VERSION_3_32 "syslog-ng PE 7.0"
+#define VERSION_3_33 "syslog-ng PE 7.0"
+#define VERSION_3_34 "syslog-ng PE 7.0"
+#define VERSION_3_35 "syslog-ng PE 7.0"
+#define VERSION_3_36 "syslog-ng PE 7.0"
+#define VERSION_3_37 "syslog-ng PE 7.0"
+#define VERSION_3_38 "syslog-ng PE 7.0"
+
+#define VERSION_VALUE_3_38 0x0700
+
+#define VERSION_4_0 "syslog-ng PE 8.0"
+#define VERSION_4_1 "syslog-ng PE 8.0"
+#define VERSION_4_2 "syslog-ng PE 8.0"
+
+#define VERSION_VALUE_4_0 0x0800
+#define VERSION_VALUE_4_1 0x0800
+#define VERSION_VALUE_4_2 0x0800
+
+/* config version code, in the same format as GlobalConfig->version */
+#define VERSION_VALUE_CURRENT VERSION_VALUE_3_38
+#define VERSION_STR_CURRENT "7.0"
+#define VERSION_PRODUCT_CURRENT VERSION_3_38
+
+/* this value points to the last syslog-ng version where we changed the
+ * meaning of any setting in the configuration file.  Basically, it is the
+ * highest value passed to any cfg_is_config_version_older() call.
+ */
+#define VERSION_VALUE_LAST_SEMANTIC_CHANGE VERSION_VALUE_3_38
+#define VERSION_STR_LAST_SEMANTIC_CHANGE "7.0"
+
+/* version based feature flips */
+#define VERSION_VALUE_NEXT_MAJOR VERSION_VALUE_4_2
+
+/* When we are over 4.0 (8.0) which introduced FEATURE_TYPING_MIN_VERSION, we should
+ * set min_version to an extremal value (0).  We should remove this macro if all
+ * derived works introduce typing support.  Until that point we keep it
+ * here, so the same codebase can execute with typing disabled. */
+#define FEATURE_TYPING_MIN_VERSION VERSION_VALUE_4_2
+#define FEATURE_TYPING_VERSION "syslog-ng PE 8.0"
+
+#endif
